@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { ChevronDown, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,12 +29,6 @@ const bikeModels: BikeModel[] = [
     image: '/lovable-uploads/cdb9b2d5-27fd-4e87-95bd-83aecf21377f.png'
   }
 ];
-
-const locationCoordinates = {
-  "Angel College Center": { top: "20%", left: "25%" },
-  "Hawkins Hall": { top: "50%", left: "70%" },
-  "Wilson Hall": { top: "85%", left: "90%" }
-};
 
 const Index = () => {
   const [pickupLocation, setPickupLocation] = useState('');
@@ -142,25 +137,6 @@ const Index = () => {
               alt="Campus Map" 
               className="object-cover w-full h-full"
             />
-            
-            {locations.map((location) => (
-              <div 
-                key={location} 
-                className="absolute flex flex-col items-center"
-                style={{ 
-                  top: locationCoordinates[location as keyof typeof locationCoordinates]?.top, 
-                  left: locationCoordinates[location as keyof typeof locationCoordinates]?.left,
-                  transform: 'translate(-50%, -50%)',
-                }}
-              >
-                <div className="bg-ecampus-green text-white rounded-full p-2 shadow-lg hover:scale-110 transition-transform">
-                  <MapPin className="h-6 w-6" />
-                </div>
-                <div className="mt-1 bg-black/80 text-white px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap shadow-md">
-                  {location}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
