@@ -1,14 +1,199 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from 'react';
+import { ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Navbar from '@/components/layout/Navbar';
+import BikeCard, { BikeModel } from '@/components/BikeCard';
+import LocationSelector, { locations } from '@/components/LocationSelector';
+
+const bikeModels: BikeModel[] = [
+  {
+    id: 1,
+    name: 'E-Bike Model 1',
+    range: 20,
+    price: 5,
+    image: '/lovable-uploads/e3b8a797-c5bd-41b7-b4b4-cecaf605b323.png'
+  },
+  {
+    id: 2,
+    name: 'E-Bike Model 2',
+    range: 25,
+    price: 6,
+    image: '/lovable-uploads/4dbd7914-e4f0-4587-87f7-fe0b4a5a28a3.png'
+  },
+  {
+    id: 3,
+    name: 'E-Bike Model 3',
+    range: 30,
+    price: 7,
+    image: '/lovable-uploads/0e6332cd-7454-4162-940c-0770c08aff77.png'
+  }
+];
 
 const Index = () => {
+  const [pickupLocation, setPickupLocation] = useState('');
+  const [dropoffLocation, setDropoffLocation] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-ecampus-lightgray">
+      {/* Hero Section */}
+      <div 
+        className="relative h-[70vh] bg-cover bg-center flex items-center justify-center overflow-hidden"
+        style={{ backgroundImage: `url('/lovable-uploads/e3b8a797-c5bd-41b7-b4b4-cecaf605b323.png')` }}
+      >
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <Navbar />
+        
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <h1 
+            className={`text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 transition-all duration-700 ease-out ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}
+          >
+            Rent an E-Bike for Easy Campus Travel
+          </h1>
+          <p 
+            className={`text-xl text-white/90 max-w-2xl mx-auto mb-8 transition-all duration-700 delay-100 ease-out ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}
+          >
+            Get around campus quickly, sustainably, and enjoyably with our premium electric bikes
+          </p>
+          
+          <div 
+            className={`flex flex-col items-center transition-all duration-700 delay-200 ease-out ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}
+          >
+            <Button
+              className="bg-ecampus-green hover:bg-ecampus-green/90 text-white rounded-full px-8 py-6 text-lg"
+              onClick={() => {
+                const element = document.getElementById('bike-selection');
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Browse E-Bikes
+            </Button>
+            
+            <ChevronDown 
+              className="mt-8 h-10 w-10 text-white/70 animate-bounce cursor-pointer" 
+              onClick={() => {
+                const element = document.getElementById('bike-selection');
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            />
+          </div>
+        </div>
       </div>
+      
+      {/* Bike Selection Section */}
+      <div id="bike-selection" className="py-24 container mx-auto px-4">
+        <div className="max-w-4xl mx-auto mb-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Select Your Perfect Campus E-Bike</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <LocationSelector
+              type="pickup"
+              value={pickupLocation}
+              onChange={setPickupLocation}
+            />
+            <LocationSelector
+              type="dropoff"
+              value={dropoffLocation}
+              onChange={setDropoffLocation}
+            />
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {bikeModels.map((bike, index) => (
+            <div 
+              key={bike.id} 
+              className={`transition-all duration-700 ease-out delay-${index * 100} ${
+                isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+              }`}
+            >
+              <BikeCard bike={bike} />
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* Campus Map Section */}
+      <div className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16">Our Campus Stations</h2>
+          
+          <div className="relative aspect-video max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border shadow-subtle">
+            <img 
+              src="/lovable-uploads/e3b8a797-c5bd-41b7-b4b4-cecaf605b323.png" 
+              alt="Campus Map" 
+              className="object-cover w-full h-full"
+            />
+            
+            {/* Station Markers - these would be positioned properly on an actual map */}
+            {locations.map((location, index) => (
+              <div 
+                key={location} 
+                className="absolute bg-ecampus-green text-white rounded-full p-2 transform -translate-x-1/2 -translate-y-1/2 shadow-lg"
+                style={{ 
+                  top: `${30 + (index * 30)}%`, 
+                  left: `${20 + (index * 30)}%` 
+                }}
+              >
+                <MapPin className="h-6 w-6" />
+                <span className="absolute whitespace-nowrap top-full left-1/2 transform -translate-x-1/2 mt-1 bg-black/80 px-2 py-1 rounded text-xs">
+                  {location}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Footer */}
+      <footer className="bg-ecampus-black text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-6 md:mb-0">
+              <img 
+                src="/lovable-uploads/8f70293c-7b8c-4305-a502-83b76070d08f.png" 
+                alt="Ecampus Bike" 
+                className="h-10 w-auto invert" 
+              />
+            </div>
+            
+            <div className="text-center md:text-right">
+              <p className="text-sm text-gray-400 mb-2">© 2023 Ecampus E-Bike. All rights reserved.</p>
+              <p className="text-sm text-gray-400">Contact: ecampusbike@college.edu</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
 
 export default Index;
+
+// Temporary MapPin component until it's imported from lucide-react
+const MapPin = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+);
