@@ -52,7 +52,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           <Link 
             to="/cart" 
-            className="relative p-2 rounded-full bg-ecampus-green text-white hover:bg-ecampus-green/90 transition-all-300"
+            className="relative p-2 rounded-full bg-ecampus-green text-white hover:bg-ecampus-green/90 transition-all-300 hover:scale-105"
           >
             <ShoppingCart className="h-5 w-5" />
             {cartItems.length > 0 && (
@@ -64,7 +64,7 @@ const Navbar = () => {
           
           <Link 
             to="/login" 
-            className="flex items-center space-x-1 px-4 py-2 rounded-full bg-ecampus-gray hover:bg-ecampus-gray/80 transition-all-300"
+            className="flex items-center space-x-1 px-4 py-2 rounded-full bg-ecampus-gray hover:bg-ecampus-gray/80 transition-all-300 hover:scale-105"
           >
             <span>Log in</span>
             <User className="h-4 w-4" />

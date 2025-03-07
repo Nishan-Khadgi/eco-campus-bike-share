@@ -40,13 +40,12 @@ const Index = () => {
   }, []);
   
   return (
-    <div className="min-h-screen bg-ecampus-lightgray">
+    <div className="min-h-screen bg-ecampus-lightgray overflow-hidden">
       {/* Hero Section */}
       <div 
-        className="relative h-[70vh] bg-cover bg-center flex items-center justify-center overflow-hidden"
-        style={{ backgroundImage: `url('/lovable-uploads/e3b8a797-c5bd-41b7-b4b4-cecaf605b323.png')` }}
+        className="relative h-[70vh] bike-hero-bg flex items-center justify-center overflow-hidden"
       >
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
         <Navbar />
         
         <div className="relative z-10 container mx-auto px-4 text-center">
@@ -92,8 +91,11 @@ const Index = () => {
       </div>
       
       {/* Bike Selection Section */}
-      <div id="bike-selection" className="py-24 container mx-auto px-4">
-        <div className="max-w-4xl mx-auto mb-16">
+      <div id="bike-selection" className="py-24 container mx-auto px-4 bg-pattern-dots relative">
+        <div className="absolute top-0 left-0 w-60 h-60 bg-ecampus-green/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-ecampus-green/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+        
+        <div className="max-w-4xl mx-auto mb-16 relative z-10">
           <h2 className="text-3xl font-bold text-center mb-12">Select Your Perfect Campus E-Bike</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -110,7 +112,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {bikeModels.map((bike, index) => (
             <div 
               key={bike.id} 
@@ -125,11 +127,14 @@ const Index = () => {
       </div>
       
       {/* Campus Map Section */}
-      <div className="py-24 bg-white">
-        <div className="container mx-auto px-4">
+      <div className="py-24 bg-white bg-pattern-lines relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-full h-64 bg-blur-gradient transform rotate-180"></div>
+        <div className="absolute bottom-0 left-0 w-full h-64 bg-blur-gradient"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-bold text-center mb-16">Our Campus Stations</h2>
           
-          <div className="relative aspect-video max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border shadow-subtle">
+          <div className="relative aspect-video max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border shadow-subtle campus-map-bg">
             <img 
               src="/lovable-uploads/e3b8a797-c5bd-41b7-b4b4-cecaf605b323.png" 
               alt="Campus Map" 
@@ -140,7 +145,7 @@ const Index = () => {
             {locations.map((location, index) => (
               <div 
                 key={location} 
-                className="absolute bg-ecampus-green text-white rounded-full p-2 transform -translate-x-1/2 -translate-y-1/2 shadow-lg"
+                className="absolute bg-ecampus-green text-white rounded-full p-2 transform -translate-x-1/2 -translate-y-1/2 shadow-lg hover:scale-110 transition-transform"
                 style={{ 
                   top: `${30 + (index * 30)}%`, 
                   left: `${20 + (index * 30)}%` 
@@ -157,8 +162,9 @@ const Index = () => {
       </div>
       
       {/* Footer */}
-      <footer className="bg-ecampus-black text-white py-12">
-        <div className="container mx-auto px-4">
+      <footer className="bg-ecampus-black text-white py-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-pattern-dots opacity-10"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
               <img 
