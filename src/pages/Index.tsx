@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -30,6 +29,12 @@ const bikeModels: BikeModel[] = [
   }
 ];
 
+const locationCoordinates = {
+  "Angel College Center": { top: "20%", left: "25%" },
+  "Hawkins Hall": { top: "50%", left: "70%" },
+  "Wilson Hall": { top: "85%", left: "90%" }
+};
+
 const Index = () => {
   const [pickupLocation, setPickupLocation] = useState('');
   const [dropoffLocation, setDropoffLocation] = useState('');
@@ -41,7 +46,6 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-ecampus-lightgray overflow-hidden">
-      {/* Hero Section */}
       <div 
         className="relative h-[70vh] bike-hero-bg flex items-center justify-center overflow-hidden"
       >
@@ -90,7 +94,6 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Bike Selection Section */}
       <div id="bike-selection" className="py-24 container mx-auto px-4 bg-pattern-dots relative">
         <div className="absolute top-0 left-0 w-60 h-60 bg-ecampus-green/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-ecampus-green/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
@@ -126,7 +129,6 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Campus Map Section */}
       <div className="py-24 bg-white bg-pattern-lines relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-64 bg-blur-gradient transform rotate-180"></div>
         <div className="absolute bottom-0 left-0 w-full h-64 bg-blur-gradient"></div>
@@ -134,34 +136,35 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-bold text-center mb-16">Our Campus Stations</h2>
           
-          <div className="relative aspect-video max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border shadow-subtle campus-map-bg">
+          <div className="relative aspect-video max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border shadow-subtle">
             <img 
-              src="/lovable-uploads/e3b8a797-c5bd-41b7-b4b4-cecaf605b323.png" 
+              src="/lovable-uploads/ebb52093-24a6-4846-8769-0b944b13ccc6.png" 
               alt="Campus Map" 
               className="object-cover w-full h-full"
             />
             
-            {/* Station Markers - these would be positioned properly on an actual map */}
-            {locations.map((location, index) => (
+            {locations.map((location) => (
               <div 
                 key={location} 
-                className="absolute bg-ecampus-green text-white rounded-full p-2 transform -translate-x-1/2 -translate-y-1/2 shadow-lg hover:scale-110 transition-transform"
+                className="absolute flex flex-col items-center"
                 style={{ 
-                  top: `${30 + (index * 30)}%`, 
-                  left: `${20 + (index * 30)}%` 
+                  top: locationCoordinates[location as keyof typeof locationCoordinates]?.top, 
+                  left: locationCoordinates[location as keyof typeof locationCoordinates]?.left,
+                  transform: 'translate(-50%, -50%)',
                 }}
               >
-                <MapPin className="h-6 w-6" />
-                <span className="absolute whitespace-nowrap top-full left-1/2 transform -translate-x-1/2 mt-1 bg-black/80 px-2 py-1 rounded text-xs">
+                <div className="bg-ecampus-green text-white rounded-full p-2 shadow-lg hover:scale-110 transition-transform">
+                  <MapPin className="h-6 w-6" />
+                </div>
+                <div className="mt-1 bg-black/80 text-white px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap shadow-md">
                   {location}
-                </span>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
       
-      {/* Footer */}
       <footer className="bg-ecampus-black text-white py-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-pattern-dots opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
