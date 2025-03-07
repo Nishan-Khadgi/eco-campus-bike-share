@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/layout/Navbar';
 import BikeCard, { BikeModel } from '@/components/BikeCard';
@@ -23,10 +23,10 @@ const bikeModels: BikeModel[] = [
   },
   {
     id: 3,
-    name: 'E-Bike Model 3',
+    name: 'Cardinal Cruiser',
     range: 30,
     price: 7,
-    image: '/lovable-uploads/0e6332cd-7454-4162-940c-0770c08aff77.png'
+    image: '/lovable-uploads/cdb9b2d5-27fd-4e87-95bd-83aecf21377f.png'
   }
 ];
 
@@ -162,15 +162,15 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
               <img 
-                src="/lovable-uploads/8f70293c-7b8c-4305-a502-83b76070d08f.png" 
-                alt="Ecampus Bike" 
-                className="h-10 w-auto invert" 
+                src="/lovable-uploads/d989f7a3-1b27-4ce2-a62a-96b178e373a4.png" 
+                alt="Campus Bike" 
+                className="h-16 w-auto" 
               />
             </div>
             
             <div className="text-center md:text-right">
-              <p className="text-sm text-gray-400 mb-2">© 2023 Ecampus E-Bike. All rights reserved.</p>
-              <p className="text-sm text-gray-400">Contact: ecampusbike@college.edu</p>
+              <p className="text-sm text-gray-400 mb-2">© 2023 Campus E-Bike. All rights reserved.</p>
+              <p className="text-sm text-gray-400">Contact: campusbike@college.edu</p>
             </div>
           </div>
         </div>
@@ -180,20 +180,3 @@ const Index = () => {
 };
 
 export default Index;
-
-// Temporary MapPin component until it's imported from lucide-react
-const MapPin = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}
-  >
-    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-    <circle cx="12" cy="10" r="3"/>
-  </svg>
-);

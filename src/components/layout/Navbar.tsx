@@ -36,9 +36,9 @@ const Navbar = () => {
           className="flex items-center transition-all-300 hover:opacity-80"
         >
           <img 
-            src="/lovable-uploads/8f70293c-7b8c-4305-a502-83b76070d08f.png" 
-            alt="Ecampus Bike" 
-            className="h-10 w-auto" 
+            src="/lovable-uploads/d989f7a3-1b27-4ce2-a62a-96b178e373a4.png" 
+            alt="Campus Bike" 
+            className="h-16 w-auto" 
           />
         </Link>
         
@@ -46,7 +46,7 @@ const Navbar = () => {
           "text-2xl font-medium transition-all-300 absolute left-1/2 transform -translate-x-1/2",
           scrolled ? "opacity-0" : "opacity-100"
         )}>
-          Ecampus E-Bike Rental
+          Campus E-Bike Rental
         </h1>
         
         <div className="flex items-center space-x-4">
